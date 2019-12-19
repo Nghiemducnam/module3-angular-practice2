@@ -1,0 +1,24 @@
+<h3>Login form!</h3>
+<form (ngSubmit)="onSubmit(formSignIn);" #formSignIn="ngForm">
+    <br>
+    <input type="text" placeholder="email" ngModel name="email" #txtEmail="ngModel" required email/>
+    <p *ngIf="txtEmail.touched && txtEmail.errors?.required">Email is required!</p>
+    <p *ngIf="txtEmail.touched && txtEmail.errors?.email">Email is not valid!</p>
+    <br>
+    <input type="password" placeholder="password" ngModel name="password" #txtPassword="ngModel" minlength="6" />
+    <br>
+    <p *ngIf="txtPassword.touched && txtPassword.errors?.minlength">least 6 charactres</p>
+    <br>
+    <div ngModelGroup='subjects'>
+        <label><input type="checkbox" ngModel name="MySql">MySql</label>
+        <label><input type="checkbox" ngModel name="PHP">PHP</label>
+        <label><input type="checkbox" ngModel name="Java">Java</label>
+    </div>
+    <br>
+    <button [disabled]='formSignIn.invalid'>Submit</button>
+</form>
+<p>{{txtEmail.errors | json}}</p>
+<br>
+<p>{{txtPassword.errors | json}}</p>
+<br>
+<p>{{formSignIn.value | json}}</p>
