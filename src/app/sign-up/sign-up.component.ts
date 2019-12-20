@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     this.formSignUp = this.fb.group({
-      email : '@gmail.com',
+      email : ['', [gmailValidator, Validators.email]],
       password : '',
       subjects : this.fb.group({
         MySql : true,
@@ -28,5 +28,11 @@ export class SignUpComponent implements OnInit {
   onSubmit(){
     console.log(this.formSignUp.value);
   }
-
 }
+
+  function gmailValidator(formControl : FormControl) {
+    if(formControl.value.includes('@gmail.com')) {
+      return null;
+    }
+    return {gmail : true};
+  }
